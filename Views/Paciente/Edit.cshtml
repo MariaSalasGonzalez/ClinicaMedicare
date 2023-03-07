@@ -1,0 +1,91 @@
+@model Paciente
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<br>
+<h2 class="text-success">Editar datos del paciente</h2>
+<br>
+
+<form method="post" asp-action="Edit" NoSeguroSocial="formEditPaciente">
+    <div class="container">
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="id" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="id" readonly class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Nombre" class="form-control">
+                 <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Edad" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Edad" class="form-control">
+                 <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Enfermedad" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Enfermedad" class="form-control">
+                 <span asp-validation-for="Enfermedad" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group-row">
+            <div class="row">
+                <div class="col-3">
+                       
+                    <button
+                        asp-asp-routeid="@Model"
+                        class="btn btn-success form-control"
+                        id="btnEditPaciente"
+                    >
+                        <i class="far fa-edit"></i> 
+                        Actualizar Datos
+                    </button>
+                </div>
+                <div class="col-3">
+                    <a asp-action="Index" asp-controller="Paciente" class="btn btn-info form-control">
+                        Volver a la lista de pacientes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+
+        $("#btnEditPaciente").click(function (e) {
+            e.preventDefault()
+            Swal.fire({
+             title: 'Desea actualizar los datos de paciente?',
+             showDenyButton: true,
+             confirmButtonText: `Guardar Cambios`,
+             denyButtonText: `Cancelar`,
+             }).then((result) => {
+             if (result.isConfirmed) {
+                 Swal.fire('Editado  con Exito!', '', 'success')
+                 $("#formEditPaciente").submit();
+             } else if (result.isDenied) {
+                 Swal.fire('Cambios no realizados', '', 'info')
+             }
+             })
+        })
+    });
+</script>

@@ -1,0 +1,89 @@
+@model Paciente
+@{
+    ViewData["Title"] = "Registro";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<br>
+<br>
+<h1 class="text text-primary text-center"> Registro de Pacientes</h1>
+<br>
+<br>
+<div class="col-8 border-rigth ">
+    @* paso uno poner u id  para identificar *@
+    <form method="post" asp-action=Create id="formCreatePaciente">
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="id" class="col-form-label"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="id" readonly value="@ViewBag.Iden" class="form-control" />
+            </div>
+            <span asp-validation-for="id" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Edad" class="col-form-label"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Edad" class="form-control" />
+                <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Enfermedad" class="col-form-label"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Enfermedad" class="form-control" />
+                <span asp-validation-for="Enfermedad" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-6">
+
+                        <button 
+                        NoSeguroSocial="btnGuardar" 
+                        class="btn btn-success form-control">
+                        <span class= "btn-label"
+                        >
+                            <i class="fa fa-save"></i></span>
+                            Guardar
+                        </button>
+
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" asp-controller="Paciente" class="btn btn-secondary form-control">
+                            Cancelar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () { 
+
+        $("#btnGuardar").click(function (e) {  
+            e.preventDefault()
+            Swal.fire('Guardado con Exito!',).then($("#formCreatePaciente").submit()) 
+        })
+    });
+</script> 
